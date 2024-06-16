@@ -2,6 +2,7 @@
 import { SignedIn } from '@clerk/nextjs'
 import React from 'react'
 import SideNav from './_components/sideNav'
+import { ThemeProvider } from '../_components/theme-provider'
 
 function DashboardLayout({ children }) {
     return (

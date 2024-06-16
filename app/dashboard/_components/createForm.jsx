@@ -19,7 +19,7 @@ import moment from 'moment'
 import { useRouter } from 'next/navigation'
 import { Loader2 } from 'lucide-react'
 
-const PROMPT = ", Based on the description provided, please give a form in Json format, with formTitle, formHeading along with fieldName, fieldTitle, fieldType, placeholder, label, required fields in Json Format."
+const PROMPT = ", Based on the description provided, please give a form in Json format, with formTitle, formHeading along with formFields, each formField contains fieldName, fieldTitle, fieldType, placeholder, label, required fields in Json Format, if the fieldType is select, add a field called options, options is an array of option (String). if the fieldType is checkbox or radio and had options, each option contains a value and a label. you have to respect all this requirements."
 
 function CreateForm() {
     const [openDialog, setOpenDialog] = useState(false)
@@ -41,7 +41,7 @@ function CreateForm() {
             ).returning({id:JsonForms.id})
             console.log("New Form ID :", response[0].id)
             if (response[0].id) {
-                route.push('/editFormStyle/'+response[0].id)
+                route.push('/edit-form/' + response[0].id)
             }
             setLoading(false);
         }
@@ -49,17 +49,14 @@ function CreateForm() {
 
     return (
         <div>
+            <Dialog open={openDialog} onOpenChange={setOpenDialog}>
             <Button onClick={() => setOpenDialog(true)}>+ Create a Form</Button>
-            <Dialog open={openDialog}>
                 <DialogContent>
                     <DialogHeader>
-                        <DialogTitle>Create a new Form</DialogTitle>
-                        <Textarea onChange={(event) => setUserInput(event.target.value)}  className='my-2'  placeholder="Type your Form description here." />
-                        <div className='flex gap-2 my-3 justify-end'>
-                            <Button variant="destructive" onClick = {() => setOpenDialog(false)}>
-                                Cancel
-                            </Button>
-                            <Button onClick = { () => onCreateForm()} disabled = {loading} >
+                        <DialogTitle>Create a new Form 📑</DialogTitle>
+                        <Textarea onChange={(event) => setUserInput(event.target.value)}  className='my-2'  placeholder="📝 Describe your form here! Explain its purpose and the information you need to collect. Let AI take care of the rest! 🤖" />
+                        <div className='flex my-2 justify-end'>
+                            <Button className='mt-2' onClick = { () => onCreateForm()} disabled = {loading} >
                             {loading ? <Loader2 className='animate-spin ' /> : 'Create'}  
                             </Button>
                         </div>
