@@ -2,11 +2,12 @@
 import { SignedIn } from '@clerk/nextjs'
 import React from 'react'
 import SideNav from './_components/sideNav'
-import { ThemeProvider } from '../_components/theme-provider'
 
 function DashboardLayout({ children }) {
     return (
         <SignedIn>
+            
+
             <div>
 
                 <div className='md:w-64 fixed'>

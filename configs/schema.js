@@ -18,5 +18,14 @@ export const UserResponses = pgTable('userResponses', {
     jsonResponse: text('jsonResponse').notNull(),
     createdBy: varchar('createdBy').default('anonymous'),
     createdAt: varchar('createdAt').notNull(),
-    formRef: integer('formRef').references(() => JsonForms.id)
+    formRef: integer('formRef').references(() => JsonForms.id, { onDelete: 'cascade' })
 })
+
+export const Users = pgTable('users', {
+    id: serial('id').primaryKey(),
+    emailAddress: varchar('emailAddress').notNull().unique(),
+    createdAt: varchar('createdAt').notNull(),
+    formCount: integer('formCount').default(0),
+    stripeCustomerId: text('stripe_customer_id'),
+    subscribed: boolean('subscribed'),
+});
