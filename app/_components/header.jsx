@@ -1,4 +1,5 @@
 "use client"
+import { ThemeToggle } from "@/components/theme-toggle"
 import { Button } from "@/components/ui/button"
 import { SignInButton, UserButton, useUser } from "@clerk/nextjs"
 import Image from 'next/image'
@@ -10,10 +11,11 @@ function Header() {
     const { user, isSignedIn } = useUser();
     const path = usePathname()
 
-        return !path.includes("aiForm") && (
+    return !path.includes("aiForm") && (
         <div className='p-5 border-b shadow-sm'>
             <div className='flex items-center justify-between'>
                 <Image src='/logo.svg' width={180} height={50} alt='logo' />
+                <ThemeToggle />
                 {
                     isSignedIn ? <div className="flex items-center gap-5">
                         <Link href={'/dashboard'}>

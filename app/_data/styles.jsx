@@ -10,7 +10,7 @@ const Styles = [
         id:2,
         name:'retro',
         img:'/retro.png',
-        value:'5px 5px 0px black',
+        value:'5px 5px 0px',
         key:'box-shadow'
     },
     {

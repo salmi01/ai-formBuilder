@@ -95,7 +95,7 @@ function EditForm({ params }) {
                         }}
                         onClick={() => console.log("shared successfully!")}
                     >
-                        <Button className='flex gap-2 bg-green-500 hover:bg-green-600'> <Share2 /> Share</Button>
+                        <Button className='flex gap-2 bg-green-500 hover:bg-green-600' > <Share2 /> Share</Button>
 
                     </RWebShare>
                 </div>

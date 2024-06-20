@@ -56,8 +56,8 @@ function FormListItem({ formRecord, jsonForm, refreshData }) {
                 </AlertDialog>
 
             </div>
-            <h2 className='text-lg text-black'>{jsonForm?.formTitle}</h2>
-            <h2 className='text-sm text-gray-500'>{jsonForm?.formHeading}</h2>
+            <h2 className='text-lg '><strong>  {jsonForm?.formTitle} </strong></h2>
+            <p className='text-sm text-primary '>{jsonForm?.formHeading}</p>
             <hr className='my-4'></hr>
             <div className='flex justify-between'>
                 <RWebShare
