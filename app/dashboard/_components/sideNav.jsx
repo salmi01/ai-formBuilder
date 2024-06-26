@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { LibraryBig, LineChart, MessageSquare, Shield } from 'lucide-react'
+import { CreditCard, LibraryBig, LineChart, MessageSquare, Settings, Shield } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import { Progress } from "@/components/ui/progress"
@@ -8,7 +8,6 @@ import { useUser } from '@clerk/nextjs';
 import { db } from '@/configs';
 import { JsonForms, Users } from '@/configs/schema';
 import { desc, eq } from 'drizzle-orm';
-import CreateForm from './createForm';
 
 function SideNav() {
 
@@ -39,6 +38,12 @@ function SideNav() {
             icon: Shield,
             path: '/dashboard/upgrade'
         },
+        {
+            id: 5,
+            name: 'Billing',
+            icon: CreditCard,
+            path: '/dashboard/billing'
+        }
     ]
 
     const { user } = useUser()

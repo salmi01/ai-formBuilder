@@ -1,7 +1,10 @@
 'use client'
 import PricingPlans from '@/app/_data/pricingPlans'
+import { getStripe } from '@/lib/stripe-client'
 import { useUser } from '@clerk/nextjs'
+import { useRouter } from 'next/navigation'
 import React from 'react'
+import SubscribeBtn from '../_components/subscription/subscribeButton'
 
 function Upgrade() {
     const { user } = useUser()

@@ -26,6 +26,7 @@ export const Users = pgTable('users', {
     emailAddress: varchar('emailAddress').notNull().unique(),
     createdAt: varchar('createdAt').notNull(),
     formCount: integer('formCount').default(0),
+    priceId: text('price_id'),
     stripeCustomerId: text('stripe_customer_id'),
-    subscribed: boolean('subscribed'),
+    isSubscribed: boolean('isSubscribed').default(false),
 });
