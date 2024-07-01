@@ -41,7 +41,7 @@ function Privacy() {
                 <div>
                     <h2 className="text-2xl font-bold">Contact Us</h2>
                     <p className="mt-2">
-                        If you have any questions or concerns about our privacy policy, please don`&apos;`t hesitate to contact us at{" "}
+                        If you have any questions or concerns about our privacy policy, please don&apos;t hesitate to contact us at{" "}
                         <Link href="#" className="text-primary" prefetch={false}>
                             support@formaize.com
                         </Link>
