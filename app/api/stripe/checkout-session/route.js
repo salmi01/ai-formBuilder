@@ -23,7 +23,7 @@ export async function POST(req) {
         const session = await stripe.checkout.sessions.create(
             {
                 success_url: `${baseUrl}/dashboard`,
-                cancel_url: `${baseUrl}/payment/cancel`,
+                cancel_url: `${baseUrl}/dashboard/upgrade`,
                 payment_method_types: ["card"],
                 line_items: [
                     {
