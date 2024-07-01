@@ -25,7 +25,7 @@ function FormList() {
     }
 
     return (
-        <div className='mt-5 grid sm:grid-cols-2 md:grid-cols-3 gap-5'>
+        <div className='m-5 grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5 w-full'>
             {
                 userFormList.map((form, index) => (
                     <FormListItem key={index} jsonForm={JSON.parse(form?.jsonform)}

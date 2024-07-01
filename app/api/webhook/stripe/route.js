@@ -63,6 +63,11 @@ export async function POST(req) {
                     } else {
                         // If user exists, use the existing user
                         user = users[0];
+                        if (!user.stripeCustomerId) {
+                            await db.update(Users)
+                                .set({ stripeCustomerId: customerId })
+                                .where(eq(Users.emailAddress, customer.email));
+                        }
                     }
                 } else {
                     console.error('No user found');
@@ -92,6 +97,8 @@ export async function POST(req) {
                 // ✅ Send email to user
                 break;
             }
+            default:
+                break;
 
         }
     } catch (e) {

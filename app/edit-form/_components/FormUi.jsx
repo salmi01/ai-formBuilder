@@ -94,14 +94,14 @@ function FormUi({ jsonForm, selectedTheme, selectedStyle, onFieldUpdate, deleteF
         {jsonForm?.formTitle}
 
       </h2>
-      <h2 className='text-sm text-gray-400 text-center'>
+      <h2 className='text-sm text-center'>
         {jsonForm?.formHeading}
       </h2>
       {jsonForm?.formFields?.map((formField, index) => (
         <div key={index} className=''>
           {formField?.fieldType === 'select' ?
             <div className='my-3 w-full'>
-              <label className='text-xs text-gray-500'>{formField?.label}</label>
+              <label className='text-xs '>{formField?.label}</label>
               <Select required={formField?.required} onValueChange={(value) => handleSelectChange(formField?.fieldName, value)}>
                 <SelectTrigger className="w-full bg-transparent">
                   <SelectValue placeholder={formField?.placeholder} />
@@ -115,7 +115,7 @@ function FormUi({ jsonForm, selectedTheme, selectedStyle, onFieldUpdate, deleteF
             </div>
             : formField.fieldType === 'radio' ?
               <div className='my-3 w-full'>
-                <label className='text-xs text-gray-500'>{formField?.label}</label>
+                <label className='text-xs '>{formField?.label}</label>
                 <RadioGroup required={formField?.required}>
                   {formField.options.map((option, index) => (
                     <div key={index} className="flex items-center space-x-2">
@@ -128,7 +128,7 @@ function FormUi({ jsonForm, selectedTheme, selectedStyle, onFieldUpdate, deleteF
 
               : formField.fieldType === 'checkbox' ?
                 <div className='my-3 w-full'>
-                  <label className='text-xs text-gray-500'>{formField.label}</label>
+                  <label className='text-xs '>{formField.label}</label>
                   {formField?.options ? formField?.options?.map((option, index) => (
                     <div key={index} className='flex gap-2 items-center'>
                       <Checkbox id={option?.value} onCheckedChange={(value) => handleCheckboxChange(formField?.label, option?.label, value)} />
@@ -155,7 +155,7 @@ function FormUi({ jsonForm, selectedTheme, selectedStyle, onFieldUpdate, deleteF
                 :
                 <div key={index} className='my-3 w-full'>
 
-                  <label className='text-xs text-gray-500'>{formField?.label}</label>
+                  <label className='text-xs '>{formField?.label}</label>
                   <Input className='bg-transparent' type={formField?.fieldType} placeholder={formField?.placeholder} name={formField?.fieldName}
                     required={formField?.required} onChange={(e) => handleInputChange(e)}
                   />
@@ -170,7 +170,7 @@ function FormUi({ jsonForm, selectedTheme, selectedStyle, onFieldUpdate, deleteF
       {
         enableSignIn ? isSignedIn ? <button type='submit' className='btn btn-primary'>Submit</button> :
           <Button> <SignInButton mode='modal'>Sign in before submit </SignInButton></Button> :
-          <button type='submit' className='btn btn-primary'>Submit</button>
+          <div className='flex  justify-center'><button type='submit' className=' btn btn-primary '>Submit</button></div>
       }
 
     </form>

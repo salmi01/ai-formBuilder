@@ -25,18 +25,29 @@ function Responses() {
     }
 
     return (
-        <div className='p-10'>
-            <h2 className='font-bold text-3xl flex items-center justify-between'>Responses</h2>
-            <div className='mt-5 grid sm:grid-cols-2 md:grid-cols-3 gap-5'>
-            {
-                userFormList.map((form, index) => (
-                    <FormListItemResponse key={index} jsonForm={JSON.parse(form?.jsonform)}
-                        formRecord={form}
-                    />
-                ))
-            }
+
+        <div>
+            <div className="flex items-center justify-between mb-4">
+
+                <h1 className="text-lg font-semibold md:text-2xl">Responses</h1>
+            </div>
+            <div
+                className="flex items-center justify-center rounded-lg border border-dashed shadow-sm"
+                x-chunk="dashboard-02-chunk-1"
+            >
+                <div className='m-5 grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5 w-full'>
+
+                    {
+                        userFormList.map((form, index) => (
+                            <FormListItemResponse key={index} jsonForm={JSON.parse(form?.jsonform)}
+                                formRecord={form}
+                            />
+                        ))
+                    }
+                </div>
+            </div>
         </div>
-        </div>
+
     )
 }
 

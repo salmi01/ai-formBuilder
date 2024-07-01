@@ -3,26 +3,24 @@ import { getStripe } from '@/lib/stripe-client';
 import React from 'react'
 import { useRouter } from 'next/navigation';
 import { useUser } from '@clerk/nextjs';
+import axios from 'axios';
 
 const SubscribeBtn = ({ userId, price }) => {
 
 
     const router = useRouter();
 
-    const handleCheckout = async (price) => {
+    const handleCheckout = async (priceId) => {
         if (!userId) {
             router.push('/sign-in');
             return
         }
 
         try {
-            const { sessionId } = await fetch('/api/stripe/checkout-session', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ price }),
-            }).then((res) => res.json());
+            const { data } = await axios.post('/api/stripe/checkout-session', {
+                priceId
+            });
+            
 
             console.log('sessionId:', sessionId);
             const stripe = await getStripe();

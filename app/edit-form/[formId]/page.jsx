@@ -12,7 +12,6 @@ import Controller from '../_components/controller'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { RWebShare } from 'react-web-share'
-import { Share } from 'next/font/google'
 
 function EditForm({ params }) {
     const router = useRouter()
@@ -77,7 +76,7 @@ function EditForm({ params }) {
     }
 
     return (
-        <div className='p-10 '>
+        <div className='p-1 sm:p-4 md:p-6 lg:p-8 xl:p-10 '>
             <div className='flex justify-between items-center'>
 
                 <h2 className='flex gap-2 items-center my-5 cursor-pointer hover:font-bold ' onClick={() => router.back()}>

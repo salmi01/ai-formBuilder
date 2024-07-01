@@ -1,6 +1,6 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Header from "./_components/header";
+import Header from "./_components/landing-page/header";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "@/components/ui/sonner"
 import { ThemeProvider } from "@/components/theme-provider";
@@ -17,6 +17,9 @@ export default function RootLayout({ children }) {
 
     <ClerkProvider>
       <html lang="en" >
+        <head>
+          <link rel="icon" href="/favicon.png" />
+        </head>
         <body className={inter.className}>
           <ThemeProvider
             attribute="class"
@@ -25,7 +28,6 @@ export default function RootLayout({ children }) {
             disableTransitionOnChange
           >
 
-            <Header />
             <Toaster />
             {children}
           </ThemeProvider>

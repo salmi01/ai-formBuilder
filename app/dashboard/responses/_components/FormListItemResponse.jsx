@@ -54,7 +54,7 @@ function FormListItemResponse({ jsonForm, formRecord }) {
 
 
     return (
-        <div className='border shadow-sm rounded-lg p-4 my-5'>
+        <div className='border shadow-sm rounded-lg p-4 '>
             <h2 className='text-lg '> <strong>  {jsonForm?.formTitle} </strong></h2>
             <p className='text-sm text-primary'>{jsonForm?.formHeading}</p>
             <hr className='my-4'></hr>

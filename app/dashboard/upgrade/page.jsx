@@ -1,104 +1,133 @@
 'use client'
 import PricingPlans from '@/app/_data/pricingPlans'
-import { getStripe } from '@/lib/stripe-client'
 import { useUser } from '@clerk/nextjs'
-import { useRouter } from 'next/navigation'
-import React from 'react'
-import SubscribeBtn from '../_components/subscription/subscribeButton'
+import React, { useState } from 'react'
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Switch } from "@/components/ui/switch"
+import Link from 'next/link'
+import { toast } from 'sonner'
+import { loadStripe } from '@stripe/stripe-js'
+import axios from 'axios'
+
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY);
 
 function Upgrade() {
     const { user } = useUser()
+    const [isYearly, setIsYearly] = useState(false)
+
+    const handleCheckout = async (priceId) => {
+        if (!user) {
+            router.push('/sign-in');
+            return
+        }
+
+        try {
+            const { data } = await axios.post('/api/stripe/checkout-session', {
+                priceId, email: user?.emailAddresses?.[0]?.emailAddress
+            });
+
+            if (data.sessionId) {
+                const stripe = await stripePromise;
+
+                const response = await stripe?.redirectToCheckout({
+                    sessionId: data.sessionId,
+                });
+
+
+                return response
+            } else {
+                console.error('Failed to create checkout session');
+                toast('Failed to create checkout session')
+                return
+            }
+
+        } catch (error) {
+            console.error('Error during checkout:', error);
+            toast('Error during checkout')
+            return
+        }
+
+    }
+
+
 
     return (
-        <div className='p-10'>
-            <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:items-center md:gap-8">
-                    {PricingPlans.map((plan, index) => (
-                        <div key={index} className="rounded-2xl border border-gray-200 p-6 shadow-sm sm:px-8 lg:p-12">
-                            <div className="text-center">
-                                <h2 className="text-lg font-medium text-gray-900">
-                                    {plan.title}
-                                    <span className="sr-only">Plan</span>
-                                </h2>
+        <div>
+            <div className="flex items-center justify-between mb-4">
+                <h1 className="text-lg font-semibold md:text-2xl">Pricing</h1>
+            </div>
 
-                                <p className="mt-2 sm:mt-4">
-                                    <strong className="text-3xl font-bold text-gray-900 sm:text-4xl"> {plan.price}$ </strong>
+            <div className="flex justify-center py-12 md:py-16 lg:py-20">
+                <div className='flex flex-col'>
+                    <p className="max-w-[900px] text-center text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                        Choose the plan that fits your needs.
+                    </p>
+                    <div className="flex items-center justify-center gap-4 m-4 ">
+                        <Switch
+                            checked={isYearly}
+                            onCheckedChange={setIsYearly}
+                            className="relative inline-flex h-[24px] w-[44px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+                        >
+                            <span className="sr-only">Use setting</span>
+                            <span
+                                aria-hidden="true"
+                                className={`pointer-events-none inline-block h-[20px] w-[20px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out ${isYearly ? "translate-x-5 bg-primary" : "translate-x-0 bg-muted-foreground"
+                                    }`}
+                            />
+                        </Switch>
+                        <span className="text-sm font-medium">{isYearly ? "Yearly" : "Monthly"}</span>
+                    </div>
 
-                                    <span className="text-sm font-medium text-gray-700">{plan.duration}</span>
-                                </p>
-                            </div>
+                    <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-6 md:max-w-2xl lg:max-w-4xl">
+                        <Card className="flex flex-col items-center rounded-lg border bg-background p-6 text-center shadow-md">
+                            <CardHeader>
+                                <CardTitle>Free</CardTitle>
+                                <CardDescription>Get started for free</CardDescription>
+                            </CardHeader>
+                            <CardContent className="flex flex-col items-center gap-6">
+                                <div className="text-4xl font-bold">
+                                    $0
 
-                            <ul className="mt-6 space-y-2">
-                                <li className="flex items-center gap-1">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        strokeWidth="1.5"
-                                        stroke="currentColor"
-                                        className="size-5 text-indigo-700"
-                                    >
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                                    </svg>
-
-                                    <span className="text-gray-700"> 10 users included </span>
-                                </li>
-
-                                <li className="flex items-center gap-1">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        strokeWidth="1.5"
-                                        stroke="currentColor"
-                                        className="size-5 text-indigo-700"
-                                    >
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                                    </svg>
-
-                                    <span className="text-gray-700"> 2GB of storage </span>
-                                </li>
-
-                                <li className="flex items-center gap-1">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        strokeWidth="1.5"
-                                        stroke="currentColor"
-                                        className="size-5 text-indigo-700"
-                                    >
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                                    </svg>
-
-                                    <span className="text-gray-700"> Email support </span>
-                                </li>
-
-                                <li className="flex items-center gap-1">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        strokeWidth="1.5"
-                                        stroke="currentColor"
-                                        className="size-5 text-indigo-700"
-                                    >
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                                    </svg>
-
-                                    <span className="text-gray-700"> Help center access </span>
-                                </li>
-                            </ul>
-
-                            <a
-                                href={plan.link + '?prefilled_email='+user?.primaryEmailAddress.emailAddress} target='_blank'
-                                className="mt-8 block rounded-full border border-indigo-600  px-12 py-3 text-center text-sm font-medium text-indigo-600 hover:ring-1 hover:ring-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
-                            >
-                                Get Started
-                            </a>
-                        </div>
-                    ))}
-
+                                </div>
+                                <div className="space-y-2">
+                                    <p>3 Form Generations</p>
+                                    <p>Unlimited Users</p>
+                                    <p>Basic Support</p>
+                                </div>
+                            </CardContent>
+                            <CardFooter>
+                                <Button className="w-full">
+                                    <Link href="/dashboard">Start for free </Link>
+                                </Button>
+                            </CardFooter>
+                        </Card>
+                        <Card className="flex flex-col items-center rounded-lg border bg-background p-6 text-center shadow-md">
+                            <CardHeader>
+                                <CardTitle>Premium</CardTitle>
+                                <CardDescription>Unlock more features</CardDescription>
+                            </CardHeader>
+                            <CardContent className="flex flex-col items-center gap-6">
+                                <div className="text-4xl font-bold">
+                                    ${isYearly ? PricingPlans.at(1).price : PricingPlans.at(0).price}
+                                    <span className="text-sm font-normal text-muted-foreground">{isYearly ? "/year" : "/month"}</span>
+                                </div>
+                                <div className="space-y-2">
+                                    <p>Unlimited Form Generations</p>
+                                    <p>Unlimited Users</p>
+                                    <p>Priority Support</p>
+                                </div>
+                            </CardContent>
+                            <CardFooter>
+                                <Button className="w-full" onClick={() => handleCheckout(isYearly ? PricingPlans.at(1).apiId : PricingPlans.at(0).apiId)}>
+                                    {/*<Link href={(isYearly ? PricingPlans.at(1).link : PricingPlans.at(0).link) + '?prefilled_email=' + user?.primaryEmailAddress.emailAddress} target='_blank'>
+                                        Get started
+                                    </Link>*/}
+                                    Get started
+                                </Button>
+                            </CardFooter>
+                        </Card>
+                    </div>
                 </div>
             </div>
         </div>

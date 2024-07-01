@@ -2,7 +2,9 @@
 
 import { Button } from "@/components/ui/button";
 import { SignIn, useUser } from "@clerk/nextjs";
+import axios from "axios";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 
 // Customer portal link
@@ -11,11 +13,24 @@ const customerPortalLink =
 
 const ButtonCustomerPortal = () => {
     const { user } = useUser()
+    const router = useRouter()
+
+    const redirectToCustomerPortal = async (user) => {
+        try {
+            const {data} = await axios.post('/api/stripe/customer-portal', {
+                user: user,
+            });
+
+            router.push(data.url);
+        } catch (error) {
+            console.error('Error redirecting to customer portal:', error);
+        }
+    }
 
     if (user) {
         return (
-            <Button>
-                <Link
+            <Button className='m-5 ' onClick={()=> redirectToCustomerPortal(user)}>
+                {/*<Link
                     href={
                         customerPortalLink +
                         '?prefilled_email=' +
@@ -23,7 +38,8 @@ const ButtonCustomerPortal = () => {
                     } target='_blank'
                 >
                     Manage Subscription
-                </Link>
+                </Link>*/}
+                Manage Subscription
             </Button>
         );
     }

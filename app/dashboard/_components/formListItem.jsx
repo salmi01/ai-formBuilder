@@ -36,26 +36,8 @@ function FormListItem({ formRecord, jsonForm, refreshData }) {
     }
 
     return (
-        <div className='border shadow-sm rounded-lg p-4'>
-            <div className='flex justify-between'>
-                <h2></h2>
-                <AlertDialog>
-                    <AlertDialogTrigger asChild><Trash className='w-5 h-5 text-red-500 cursor-pointer hover:scale-105 transition-all' /></AlertDialogTrigger>
-                    <AlertDialogContent>
-                        <AlertDialogHeader>
-                            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-                            <AlertDialogDescription>
-                                This action cannot be undone. This will permanently delete your form from our servers.
-                            </AlertDialogDescription>
-                        </AlertDialogHeader>
-                        <AlertDialogFooter>
-                            <AlertDialogCancel>Cancel</AlertDialogCancel>
-                            <AlertDialogAction onClick={() => onDeleteForm()}>Continue</AlertDialogAction>
-                        </AlertDialogFooter>
-                    </AlertDialogContent>
-                </AlertDialog>
-
-            </div>
+        <div className='border shadow-sm rounded-lg p-4 '>
+            
             <h2 className='text-lg '><strong>  {jsonForm?.formTitle} </strong></h2>
             <p className='text-sm text-primary '>{jsonForm?.formHeading}</p>
             <hr className='my-4'></hr>
