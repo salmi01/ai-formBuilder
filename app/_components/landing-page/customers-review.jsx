@@ -30,7 +30,7 @@ function CustomersReview() {
                   className="rounded-lg object-cover"
                 />
                 <div className="space-y-2">
-                  <h3 className="text-xl font-bold">"Fast, intuitive, and saves so much time. Highly recommend!"</h3>
+                  <h3 className="text-xl font-bold">`&quot;`Fast, intuitive, and saves so much time. Highly recommend!`&quot;`</h3>
                   <p className="text-muted-foreground">- Sarah M., Software Engineer</p>
                 </div>
               </div>
@@ -51,7 +51,7 @@ function CustomersReview() {
                   
                 />
                 <div className="space-y-2">
-                  <h3 className="text-xl font-bold">"Fast form creation and easy sharing. A real time-saver!"</h3>
+                  <h3 className="text-xl font-bold">`&quot;`Fast form creation and easy sharing. A real time-saver!`&quot;`</h3>
                   <p className="text-muted-foreground">- Harry, Fitness coach </p>
                 </div>
               </div>
@@ -71,7 +71,7 @@ function CustomersReview() {
                   className="rounded-lg object-cover"
                 />
                 <div className="space-y-2">
-                  <h3 className="text-xl font-bold">"Formaize makes form creation fast and hassle-free."</h3>
+                  <h3 className="text-xl font-bold">`&quot;`Formaize makes form creation fast and hassle-free.`&quot;`</h3>
                   <p className="text-muted-foreground">- Alex Lee, HR Director</p>
                 </div>
               </div>

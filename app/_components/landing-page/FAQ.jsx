@@ -33,7 +33,7 @@ export default function FAQs() {
                 <AccordionItem value="item-1">
                     <AccordionTrigger>Can I customize the forms? 🎨</AccordionTrigger>
                     <AccordionContent>
-                        Absolutely! You can modify form fields, select from various themes, adjust backgrounds, and customize borders to align with your brand's style.
+                        Absolutely! You can modify form fields, select from various themes, adjust backgrounds, and customize borders to align with your brand`&apos;`s style.
                     </AccordionContent>
                 </AccordionItem>
             </Accordion>

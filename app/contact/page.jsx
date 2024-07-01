@@ -45,7 +45,7 @@ function Contact() {
                         <div className="space-y-2">
                             <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl">Get in Touch</h1>
                             <p className="max-w-[700px] text-muted-foreground md:text-xl">
-                                Have a question about our services or need support? Fill out the form below and we'll get back to you as soon as
+                                Have a question about our services or need support? Fill out the form below and we`&apos;`ll get back to you as soon as
                                 possible.
                             </p>
                         </div>

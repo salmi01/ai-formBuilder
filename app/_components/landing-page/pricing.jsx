@@ -92,4 +92,6 @@ const Pricing = React.forwardRef((props, ref) => {
     )
 })
 
+Pricing.displayName = 'Pricing';
+
 export default Pricing

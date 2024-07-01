@@ -40,7 +40,7 @@ function Terms() {
                 <div>
                     <h2 className="text-2xl font-bold tracking-tight ">Limitations of Liability</h2>
                     <p className="mt-4 text-muted-foreground">
-                        Our platform is provided "as is" and we make no warranties, express or implied, regarding its availability,
+                        Our platform is provided `&quot;`as is`&quot;` and we make no warranties, express or implied, regarding its availability,
                         accuracy, or functionality. We will not be liable for any indirect, special, incidental, or consequential
                         damages arising out of or related to your use of our platform. Our total liability to you for any claims
                         shall not exceed the amount you have paid us for the services in the 12 months preceding the claim.
